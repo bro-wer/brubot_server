@@ -1,0 +1,33 @@
+{% extends "Interface/base.html" %}
+{% load static %}
+
+{% block content%}
+
+<link rel="stylesheet" href="{% static 'Interface/css/newtask.css' %}">
+<script src="{% static 'Interface/js/newtask.js' %}"></script>
+
+
+
+{% csrf_token %}
+
+<label for="tasksTable">Define new task</label>
+<div id="tasksTable">
+  <div class="input-group">
+    {% csrf_token %}
+    <span class="input-group-addon" id="basic-addon1">Torrent name</span>
+    <input id="torrentNameInput" type="text" class="form-control" placeholder="Type name of torrent to be searched" aria-describedby="basic-addon1">
+    <span class="input-group-addon" id="basic-addon1"  onclick="findTorrents()">
+      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+    </span>
+  </div>
+  </div>
+<br>
+
+  <div id="possibleTorrentsWrapper" style="display:none">
+  <label for="possibleTorrentsTable">Possible torrents:</label>
+  <div id="possibleTorrentsTable">
+    <div class="loader"></div>
+  </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "Interface/base.html" %}
+{% load static %}
+
+{% block content%}
+
+{# <link rel="stylesheet" href="{% static 'css/index.css' %}"> #}
+{# <script src="{% static 'js/index.js' %}"></script> #}
+
+
+
+{% csrf_token %}
+
+<label for="tasksTable">Current tasks</label>
+<div id="tasksTable">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Notes</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+        {% for task in allTasks %}
+        {% if task.status == "NS" %}
+        <tr class="bg-info">
+        {% elif task.status == "ST" %}
+        <tr class="bg-warning">
+        {% elif task.status == "FI" %}
+        <tr class="bg-success">
+        {% elif task.status == "ER" %}
+        <tr class="bg-danger">
+        {% else %}
+        <tr>
+        {% endif %}
+          <td style="text-align:center" width="5%">{{task.id}}</td>
+          <td style="text-align:center">{{task.taskName}}</td>
+          <td style="text-align:center" width="10%">{{task.status}}</td>
+          <td style="text-align:center"> ... </td>
+          <td style="text-align:center" width="10%">
+            <p>
+              <span class="glyphicon glyphicon-search blue" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+            </p>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+        <td> ... </td>
+        <td> ... </td>
+        <td> ... </td>
+        <td> ... </td>
+      </tr>
+        {% endfor %}
+  </tbody>
+</table>
+  </div>
+
+
+  <label for="workerStatus">Worker status</label>
+  <div id="workerStatus">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Status</th>
+          <th scope="col">Last update</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for worker in allWorkers %}
+        <tr>
+        <td style="text-align:center">{{worker.workerName}}</td>
+        <td style="text-align:center" width="20%">{{worker.status}}</td>
+        <td style="text-align:center" width="30%">{{worker.created_at}}</td>
+      </tr>
+        {% endfor %}
+  </tbody>
+</table>
+  </div>
+
+{% endblock %}
