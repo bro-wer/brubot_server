@@ -20,7 +20,8 @@ class Task(models.Model):
 
     TYPE_CHOICES = (
         ("UD", "Undefined"),
-        ("TR", "Torrent"),
+        ("TD", "Torrent Download"),
+        ("TS", "Torrent Search"),
     )
 
     taskName = models.CharField(max_length=128)
