@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Interface',
-    'RestApi',
+#    'RestApi',
     'bootstrap3',
 ]
 
@@ -121,8 +121,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+STATIC_ROOT = '/test/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'Interface', 'static'),
-    os.path.join(BASE_DIR, 'RestApi', 'static'),
+    # os.path.join(BASE_DIR, 'RestApi', 'static'),
 )

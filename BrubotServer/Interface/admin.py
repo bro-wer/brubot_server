@@ -1,6 +1,5 @@
 from django.contrib import admin
 from Interface import models as InterfaceModels
-from RestApi import models as RestApiModels
 
 
 admin.site.register(InterfaceModels.Task)
