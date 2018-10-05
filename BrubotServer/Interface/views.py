@@ -72,7 +72,7 @@ def claimTask(request):
         print(str(request))
         try:
             taskId = request.POST.get("taskId", "")
-            task = models.Task.objects.get(id=taskId)
+            task = models.Task.objects.get(id=int(taskId))
             if task.status == "NS":
                 response_data = {"status" : "200"}
         except Exception as e:
