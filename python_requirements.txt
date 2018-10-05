@@ -1,2 +1,5 @@
 django > 2.0
 django-bootstrap3
+djangorestframework
+markdown
+django-filter

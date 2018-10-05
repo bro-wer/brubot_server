@@ -8,6 +8,9 @@ from django.http import JsonResponse
 from django.db.models import Q
 
 
+from rest_framework.decorators import api_view
+from django.views.decorators.csrf import csrf_exempt
+
 app_name='Interface'
 
 
@@ -46,6 +49,7 @@ def getAllTasks(request):
         response_data[str(task.id)] = task.getDict()
     return JsonResponse(response_data)
 
+
 def getWaitingTasks(request):
     response_data = {}
     waitingTasks = models.Task.objects.all().filter(status = "NS")
@@ -53,9 +57,21 @@ def getWaitingTasks(request):
         response_data[str(task.id)] = task.getDict()
     return JsonResponse(response_data)
 
+
 def getWaitingOrStartedTasks(request):
     response_data = {}
     waitingTasks = models.Task.objects.all().filter(Q(status = "NS") | Q(status = "ST"))
     for task in waitingTasks:
         response_data[str(task.id)] = task.getDict()
+    return JsonResponse(response_data)
+
+def claimTask(request):
+    response_data = {"status" : "400"}
+    if request.POST:
+        print(str(request))
+        taskId = request.POST.get("taskId", "")
+        task = models.Task.objects.get(id=taskId)
+        if task.status == "NS":
+            response_data = {"status" : "200"}
+
     return JsonResponse(response_data)

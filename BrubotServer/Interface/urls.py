@@ -9,6 +9,7 @@ urlpatterns = [
     url(r"newtask", views.NewTask.as_view(), name="newtask"),
 
     # urls for REST
+    url(r"rest/claimTask", views.getWaitingOrStartedTasks, name="claimTask"),
     url(r"rest/getAllTasks", views.getAllTasks, name="getAllTasks"),
     url(r"rest/getWaitingTasks", views.getWaitingTasks, name="getWaitingTasks"),
     url(r"rest/getWaitingOrStartedTasks", views.getWaitingOrStartedTasks, name="getWaitingOrStartedTasks"),
