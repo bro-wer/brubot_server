@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from .utils.torrentSearcher.extratorrentSearcher import ExtratorrentSearcher
 from django.http import JsonResponse
-
+from django.db.models import Q
 
 
 app_name='Interface'
@@ -49,6 +49,13 @@ def getAllTasks(request):
 def getWaitingTasks(request):
     response_data = {}
     waitingTasks = models.Task.objects.all().filter(status = "NS")
+    for task in waitingTasks:
+        response_data[str(task.id)] = task.getDict()
+    return JsonResponse(response_data)
+
+def getWaitingOrStartedTasks(request):
+    response_data = {}
+    waitingTasks = models.Task.objects.all().filter(Q(status = "NS") | Q(status = "ST"))
     for task in waitingTasks:
         response_data[str(task.id)] = task.getDict()
     return JsonResponse(response_data)
