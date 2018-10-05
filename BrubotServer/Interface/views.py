@@ -71,10 +71,15 @@ def claimTask(request):
     if request.POST:
         print(str(request))
         try:
+            print("DEBUG00")
             taskId = request.POST.get("taskId", "")
+            print("DEBUG01")
             task = models.Task.objects.get(id=int(taskId))
+            print("DEBUG02")
             if task.status == "NS":
+                print("DEBUG03")
                 response_data = {"status" : "200"}
+            print("DEBUG04")
         except Exception as e:
             print(str(e))
             raise
