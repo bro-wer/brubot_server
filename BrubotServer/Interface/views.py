@@ -70,9 +70,13 @@ def claimTask(request):
     response_data = {"status" : "400"}
     if request.POST:
         print(str(request))
-        taskId = request.POST.get("taskId", "")
-        task = models.Task.objects.get(id=taskId)
-        if task.status == "NS":
-            response_data = {"status" : "200"}
+        try:
+            taskId = request.POST.get("taskId", "")
+            task = models.Task.objects.get(id=taskId)
+            if task.status == "NS":
+                response_data = {"status" : "200"}
+        except Exception as e:
+            print(str(e))
+            raise
 
     return JsonResponse(response_data)
