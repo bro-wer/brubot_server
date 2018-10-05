@@ -26,7 +26,7 @@ SECRET_KEY = 'w&n653y!5m0f&q_8je&a(&^@s!82z)e&1n@ou^2ygrdxi8e^a_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [brubot.pythonanywhere.com]
 
 
 # Application definition
