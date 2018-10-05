@@ -4,8 +4,10 @@ from . import models
 from django.http import JsonResponse
 from django.http import HttpResponse
 from .utils.torrentSearcher.extratorrentSearcher import ExtratorrentSearcher
+from django.http import JsonResponse
 
-# Create your views here.
+
+
 app_name='Interface'
 
 
@@ -29,16 +31,24 @@ class NewTask(TemplateView):
 
 def findTorrents(request):
     print("\nfindTorrents\n")
-    torrentName = request.GET.get('torrentName')
 
-    print("torrentName")
-    print(torrentName)
-
-    response_data = {}
-    response_data['result'] = 'error'
-    response_data['message'] = 'Some error message'
-    extratorrentSearcher = ExtratorrentSearcher(torrentName)
+    extratorrentSearcher = ExtratorrentSearcher(request.GET.get('torrentName'))
     extratorrentSearcher.searchForTorrents()
     response_data = extratorrentSearcher.getHtmlResponse()
 
     return HttpResponse(response_data)
+
+
+def getAllTasks(request):
+    response_data = {}
+    allTasks = models.Task.objects.all()
+    for task in allTasks:
+        response_data[str(task.id)] = task.getDict()
+    return JsonResponse(response_data)
+
+def getWaitingTasks(request):
+    response_data = {}
+    waitingTasks = models.Task.objects.all().filter(status = "NS")
+    for task in waitingTasks:
+        response_data[str(task.id)] = task.getDict()
+    return JsonResponse(response_data)

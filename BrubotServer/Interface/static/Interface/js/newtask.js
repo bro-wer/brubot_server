@@ -20,9 +20,9 @@ function findTorrents() {
   const torrentName = document.getElementById('torrentNameInput').value;
 
   $.ajax({
-      url : "findTorrents", // the endpoint
-      type : "GET", // http method
-      data : { torrentName : torrentName}, // data sent with the post request
+      url : "findTorrents",
+      type : "GET",
+      data : { torrentName : torrentName},
 
       // handle a successful response
       success : function(json) {

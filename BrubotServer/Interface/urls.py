@@ -8,6 +8,10 @@ urlpatterns = [
     url(r"^$", views.HomePage.as_view(), name="home"),
     url(r"newtask", views.NewTask.as_view(), name="newtask"),
 
+    # urls for REST
+    url(r"rest/getAllTasks", views.getAllTasks, name="getAllTasks"),
+    url(r"rest/getWaitingTasks", views.getWaitingTasks, name="getWaitingTasks"),
+
     # urls for AJAX requests
     url(r"findTorrents", views.findTorrents, name="findTorrents"),
 ]

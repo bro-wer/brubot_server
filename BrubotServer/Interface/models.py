@@ -31,6 +31,19 @@ class Task(models.Model):
     def __str__(self):
         return "{} ({})".format(self.taskName, str(self.status))
 
+    def printme(self):
+        print("\n")
+        print("Task #{}".format(self.id))
+        for field in self._meta.get_fields():
+            print("\t{}: {}".format(str(field.name), eval("self." + str(field.name))))
+
+    def getDict(self):
+        taskDict = {}
+        for field in self._meta.get_fields():
+            taskDict[str(field.name)] = eval("self." + str(field.name))
+        return taskDict
+
+
 class WorkerStatus(models.Model):
 
     STATUS_CHOICES = (
