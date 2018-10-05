@@ -65,6 +65,7 @@ def getWaitingOrStartedTasks(request):
         response_data[str(task.id)] = task.getDict()
     return JsonResponse(response_data)
 
+@csrf_exempt
 def claimTask(request):
     response_data = {"status" : "400"}
     if request.POST:
