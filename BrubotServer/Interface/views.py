@@ -73,6 +73,7 @@ def claimTask(request):
         try:
             taskId = request.POST.get("taskId", "")
             task = models.Task.objects.get(id=int(taskId))
+
             if task.status == "NS":
                 task.status = "ST"
                 task.save()
@@ -80,6 +81,13 @@ def claimTask(request):
                                  "status" : "200",
                                  "message" : "Task {} claimed!".format(str(taskId)),
                                  }
+
+            else:
+                response_data = {
+                                "status" : "401",
+                                "message" : "Task {} is already claimed!".format(str(taskId)),
+                                }
+
         except Exception as e:
             print(str(e))
             raise
