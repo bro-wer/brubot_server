@@ -103,6 +103,8 @@ def updateTaskStatus(request):
         try:
             taskId = request.POST.get("taskId", "")
             task = models.Task.objects.get(id=int(taskId))
+            task.message = str(request.POST.get("status", ""))
+            task.save()
         except Exception as e:
             print(str(e))
             raise
