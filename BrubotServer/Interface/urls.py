@@ -13,6 +13,7 @@ urlpatterns = [
     url(r"rest/getAllTasks", views.getAllTasks, name="getAllTasks"),
     url(r"rest/getWaitingTasks", views.getWaitingTasks, name="getWaitingTasks"),
     url(r"rest/getWaitingOrStartedTasks", views.getWaitingOrStartedTasks, name="getWaitingOrStartedTasks"),
+    url(r"rest/updateTaskStatus", views.updateTaskStatus, name="updateTaskStatus"),
 
     # urls for AJAX requests
     url(r"findTorrents", views.findTorrents, name="findTorrents"),

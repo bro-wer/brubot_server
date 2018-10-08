@@ -3,8 +3,8 @@ from Interface import models as InterfaceModels
 
 
 class Task_Admin(admin.ModelAdmin):
-    list_display = ['taskName', 'status', 'type']
-    list_editable = ['taskName', 'status', 'type']
+    list_display = ['taskName', 'status', 'type', 'message', 'updated_at']
+    list_editable = ['status', 'type']
 admin.site.register(InterfaceModels.Task, Task_Admin)
 
 

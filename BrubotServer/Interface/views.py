@@ -65,11 +65,11 @@ def getWaitingOrStartedTasks(request):
         response_data[str(task.id)] = task.getDict()
     return JsonResponse(response_data)
 
+
 @csrf_exempt
 def claimTask(request):
     response_data = {"status" : "400"}
     if request.POST:
-        print(str(request))
         try:
             taskId = request.POST.get("taskId", "")
             task = models.Task.objects.get(id=int(taskId))
@@ -81,13 +81,28 @@ def claimTask(request):
                                  "status" : "200",
                                  "message" : "Task {} claimed!".format(str(taskId)),
                                  }
-
             else:
                 response_data = {
                                 "status" : "401",
                                 "message" : "Task {} is already claimed!".format(str(taskId)),
                                 }
+        except Exception as e:
+            print(str(e))
+            raise
 
+    return JsonResponse(response_data)
+
+
+@csrf_exempt
+def updateTaskStatus(request):
+    print("\n##########")
+    print("updateTaskStatus")
+    response_data = {"status" : "400"}
+    if request.POST:
+        print(str(request))
+        try:
+            taskId = request.POST.get("taskId", "")
+            task = models.Task.objects.get(id=int(taskId))
         except Exception as e:
             print(str(e))
             raise
