@@ -104,8 +104,8 @@ def updateTaskStatus(request):
             taskId = request.POST.get("taskId", "")
             task = models.Task.objects.get(id=int(taskId))
             statusDict = ast.literal_eval(str(request.POST.get("status", "")))
-            task.status = str(statusDict["status"})
-            task.message =str(statusDict["message"})
+            task.status = str(statusDict["status"])
+            task.message = str(statusDict["message"])
             task.save()
         except Exception as e:
             print(str(e))
