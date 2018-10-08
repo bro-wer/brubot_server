@@ -7,7 +7,7 @@ from .utils.torrentSearcher.extratorrentSearcher import ExtratorrentSearcher
 from django.http import JsonResponse
 from django.db.models import Q
 
-
+import ast
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
 
@@ -103,7 +103,9 @@ def updateTaskStatus(request):
         try:
             taskId = request.POST.get("taskId", "")
             task = models.Task.objects.get(id=int(taskId))
-            task.message = str(request.POST.get("status", ""))
+            statusDict = ast.literal_eval(str(request.POST.get("status", "")))
+            task.status = str(statusDict["status"})
+            task.message =str(statusDict["message"})
             task.save()
         except Exception as e:
             print(str(e))
