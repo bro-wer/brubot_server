@@ -81,7 +81,14 @@ def claimTask(request):
             print("DEBUG02")
             if task.status == "NS":
                 print("DEBUG03")
-                response_data = {"status" : "200"}
+                task.status = "ST"
+                print("DEBUG33")
+                task.save()
+                print("DEBUG333")
+                response_data = {
+                                 "status" : "200";
+                                 "message" : "Task {} claimed!".format(str(taskId));
+                                 }
             print("DEBUG04")
         except Exception as e:
             print(str(e))
