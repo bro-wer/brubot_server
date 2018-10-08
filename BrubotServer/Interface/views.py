@@ -71,12 +71,7 @@ def claimTask(request):
     if request.POST:
         print(str(request))
         try:
-            print("DEBUG00")
             taskId = request.POST.get("taskId", "")
-            print("DEBUG01")
-            print(taskId)
-            print("DEBUG11")
-            print(str(int(taskId)))
             task = models.Task.objects.get(id=int(taskId))
             print("DEBUG02")
             if task.status == "NS":
