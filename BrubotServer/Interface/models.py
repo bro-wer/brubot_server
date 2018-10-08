@@ -27,7 +27,7 @@ class Task(models.Model):
     taskName = models.CharField(max_length=128)
     status = models.CharField(max_length=5, default="Not Started", choices=STATUS_CHOICES)
     type = models.CharField(max_length=5, default="Undefined", choices=TYPE_CHOICES)
-    message = models.CharField(max_length=128, default="Waiting", choices=TYPE_CHOICES)
+    message = models.CharField(max_length=128, default="Waiting")
     updated_at = models.DateTimeField(auto_now=True)
 
 
